@@ -1,14 +1,32 @@
-FROM ros:kinetic  # <-- probleme pas de rviz etc dans cette image
+FROM ros:kinetic
 # apt-get install ros-desktop-full  pour avoir tout ça a tester ?
+ENV DEBIAN_FRONTEND noninteractive    # export DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get update ; apt-get install -yq --no-install-recommends \ 
-    wget
-RUN wget --quiet https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh
+    wget \ 
+    ros-kinetic-rviz \
+    mesa-utils \
+    libsm6 \
+    xauth \
+    binutils \
+    xserver-xorg-input-void \
+    x11-xserver-utils \
+    openbox \
+    libgl1-mesa-dri \
+    binutils \
+    tint2 \ 
+    xinit \
+    xserver-xorg-video-dummy \ 
+    websockify \
+    x-window-system
+RUN wget https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh
 RUN bash Anaconda2-4.2.0-Linux-x86_64.sh -f -b
 RUN ~/anaconda2/bin/pip install rospkg
 RUN ~/anaconda2/bin/pip install catkin_pkg
-
-CMD [ "roscore"]
+RUN bash -c "wget -O turbovnc.deb 'http://downloads.sourceforge.net/project/turbovnc/2.1/turbovnc_2.1_amd64.deb?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fturbovnc%2Ffiles%2F2.1%2F&ts=1484049712&use_mirror=netcologne'; dpkg -i turbovnc.deb"
+RUN bash -c "wget -O turbojpeg.deb 'http://downloads.sourceforge.net/project/libjpeg-turbo/1.5.1/libjpeg-turbo-official_1.5.1_amd64.deb?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Flibjpeg-turbo%2Ffiles%2F1.5.1%2F&ts=1484049518&use_mirror=netix'; dpkg -i turbojpeg.deb"
+RUN bash -c "mkdir ~/.vnc ; echo MYVNCPASSWORD | /opt/TurboVNC/bin/vncpasswd -f > ~/.vnc/passwd; chmod 700 ~/.vnc/passwd"
+CMD bash -c "/opt/TurboVNC/bin/vncserver ; ~/anaconda2/bin/jupyter-notebook & roscore"
 
 
 ##USER root
