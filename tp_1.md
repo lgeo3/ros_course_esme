@@ -1,42 +1,44 @@
-# Installation
+# Setup
 
-1. Install Docker:
+## Install Docker:
 
-   sudo apt-get install -y docker.io 
-   sudo usermod -a -G docker $(whoami)
+    sudo apt-get install -y docker.io
+    sudo usermod -a -G docker $(whoami)
 
-To check docker is correctly installed:
+Run the hello-world docker image in order to check that docker is well installed:
 
-   docker run hello-world
+    docker run hello-world
 
-You should get the following screen: 
+You should see an hello message from docker
 
+```
 Hello from Docker!
 [...]
+```
 
-2. Getting the course docker image
+## Getting the course docker image
 
    docker pull laurentgeorge3/ros-esme
 
 
-3. Running the docker image
+## Running the docker image
 
-   docker run -it --net host --privileged  laurentgeorge3/ros-esme
+    mkdir -p ros-esme-ws/data
+    cd ros-esme-ws
+    docker run -it --net host --privileged  -v data:/data  --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" laurentgeorge3/ros-esme
+
+
+If you have an nvidia graphic card use nvidia-docker (run nvidia-docker-plugin, then nvidia-docker run [...])
    
-4. Connect to the notebook application
+## Connect to the notebook application
 
    Open the url http://localhost:8888/ into your web browser, you should get the Jupyter notebook application.
 
-5. Connect to the vncserver
+## Test ros is running
 
-   Open the url http://localhost:5801/ and start the application with javaws
+In the xterm window use the following command to check ros is running
 
-Click Always trust content from this publisher, then click RUN.
-When a password is requested use the password: MYVNCPASSWORD
-
-Open a terminal in the vncviewer window and test ros:
-
-rostopic list
+    rostopic list
 
 You should get the following result:
 
@@ -45,23 +47,37 @@ You should get the following result:
     /rosout_agg
 
 
+# ROS introduction using turtle-sim
 
 
+# Controlling a turtle-bot in gazebo simulation
 
+Start gazebo simulation with a turtlebot robot
 
+    roslaunch turtlebot_gazebo turtlebot_world.launch &
+    gzclient &
+    rviz
+    
+roslaunch turtlebot_teleop keyboard_teleop.launch
 
-GAZEBO:
+In rviz you can visualize all the sensors (3D camera, 2D camera, etc), the robot. 
 
-Simulation turtlebot:
+Using only odometry !
 
-todo utiliser le nom du package
-TURTLEBOT_GAZEBO_WORLD_FILE=/opt/ros/kinetic/share/turtlebot_gazebo/worlds/corridor.world roslaunch /opt/ros/kinetic/share/turtlebot_gazebo/launch/turtlebot_world.launch 
+Using the navigation stack:
 
-gzclient
+the robot can get lost.. in this case.. 
 
-rviz
-
-ajout dans rviz du pointcloud etc..
-
+To move the robot you can publish message on 
 
 installation package teleop : ros-kinetic-turtlebot-teleop
+
+faire ça pour ne pas avoir de souci avec amcl
+http://answers.ros.org/question/249568/no-such-file-or-directory-gmappinglaunchxml-or-amcllaunchxml-under-turtlebot_navigationlaunchincludes/
+
+
+
+Montrer la partie construction de carte  ?
+Peut être utiliser un autre robot que le turtlebot ? Un truc avec un laser ? 
+
+

@@ -7,6 +7,8 @@ ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_P
 
 RUN apt-get update ; apt-get install -yq --no-install-recommends \ 
     wget \ 
+    zsh \
+    vim \
     ros-kinetic-rviz \
     mesa-utils \
     libsm6 \
@@ -62,10 +64,12 @@ RUN ~/anaconda2/bin/pip install catkin_pkg
 RUN bash -c "wget -O turbovnc.deb 'http://downloads.sourceforge.net/project/turbovnc/2.1/turbovnc_2.1_amd64.deb?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fturbovnc%2Ffiles%2F2.1%2F&ts=1484049712&use_mirror=netcologne'; dpkg -i turbovnc.deb"
 RUN bash -c "wget -O turbojpeg.deb 'http://downloads.sourceforge.net/project/libjpeg-turbo/1.5.1/libjpeg-turbo-official_1.5.1_amd64.deb?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Flibjpeg-turbo%2Ffiles%2F1.5.1%2F&ts=1484049518&use_mirror=netix'; dpkg -i turbojpeg.deb"
 RUN bash -c "mkdir ~/.vnc ; echo MYVNCPASSWORD | /opt/TurboVNC/bin/vncpasswd -f > ~/.vnc/passwd; chmod 700 ~/.vnc/passwd"
-#CMD bash -c "/opt/TurboVNC/bin/vncserver ; ~/anaconda2/bin/jupyter-notebook & roscore"
+
+COPY .zshrc /root/.zshrc
+CMD bash -c "~/anaconda2/bin/jupyter-notebook & roscore & xterm -e zsh"
 ENV DISPLAY :2
 
-CMD bash -c "QT_X11_NO_MITSHM=1 xinit -- :0 -nolisten tcp vt$XDG_VTNR -noreset +extension GLX +extension RANDR +extension RENDER +extension XFIXES & x11vnc -display :0 -forever -shared -nopw "
+#CMD bash -c "QT_X11_NO_MITSHM=1 xinit -- :0 -nolisten tcp vt$XDG_VTNR -noreset +extension GLX +extension RANDR +extension RENDER +extension XFIXES & x11vnc -display :0 -forever -shared -nopw "
 
 ##USER root
 ##
