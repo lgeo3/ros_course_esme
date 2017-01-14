@@ -1,6 +1,9 @@
 FROM ros:kinetic
 # apt-get install ros-desktop-full  pour avoir tout ça a tester ?
 ENV DEBIAN_FRONTEND noninteractive    # export DEBIAN_FRONTEND="noninteractive"
+LABEL com.nvidia.volumes.needed="nvidia_driver"
+ENV PATH /usr/local/nvidia/bin:${PATH}
+ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
 
 RUN apt-get update ; apt-get install -yq --no-install-recommends \ 
     wget \ 
@@ -19,6 +22,32 @@ RUN apt-get update ; apt-get install -yq --no-install-recommends \
     xserver-xorg-video-dummy \ 
     websockify \
     x-window-system
+
+# apt for thewtex opengl
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  git \
+  libgl1-mesa-dri \
+  menu \
+  net-tools \
+  openbox \
+  python-pip \
+  sudo \
+  supervisor \
+  tint2 \
+  x11-xserver-utils \
+  x11vnc \
+  xinit \
+  xserver-xorg-video-dummy \
+  xserver-xorg-input-void \
+  websockify && \
+  rm -f /usr/share/applications/x11vnc.desktop && \
+  pip install supervisor-stdout && \
+  apt-get -y clean
+
+#apt-get install gazebo7 ros-kinetic-gazebo-ros ros-kinetic-gazebo-ros-control ros-kinetic-gazebo-plugins ros-kinetic-gazebo-msgs ros-kinetic-turtlebot-gazebo 
+
+
+
 RUN wget https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh
 RUN bash Anaconda2-4.2.0-Linux-x86_64.sh -f -b
 RUN ~/anaconda2/bin/pip install rospkg
@@ -26,8 +55,10 @@ RUN ~/anaconda2/bin/pip install catkin_pkg
 RUN bash -c "wget -O turbovnc.deb 'http://downloads.sourceforge.net/project/turbovnc/2.1/turbovnc_2.1_amd64.deb?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fturbovnc%2Ffiles%2F2.1%2F&ts=1484049712&use_mirror=netcologne'; dpkg -i turbovnc.deb"
 RUN bash -c "wget -O turbojpeg.deb 'http://downloads.sourceforge.net/project/libjpeg-turbo/1.5.1/libjpeg-turbo-official_1.5.1_amd64.deb?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Flibjpeg-turbo%2Ffiles%2F1.5.1%2F&ts=1484049518&use_mirror=netix'; dpkg -i turbojpeg.deb"
 RUN bash -c "mkdir ~/.vnc ; echo MYVNCPASSWORD | /opt/TurboVNC/bin/vncpasswd -f > ~/.vnc/passwd; chmod 700 ~/.vnc/passwd"
-CMD bash -c "/opt/TurboVNC/bin/vncserver ; ~/anaconda2/bin/jupyter-notebook & roscore"
+#CMD bash -c "/opt/TurboVNC/bin/vncserver ; ~/anaconda2/bin/jupyter-notebook & roscore"
+ENV DISPLAY :2
 
+CMD bash -c "QT_X11_NO_MITSHM=1 xinit -- :0 -nolisten tcp vt$XDG_VTNR -noreset +extension GLX +extension RANDR +extension RENDER +extension XFIXES & x11vnc -display :0 -forever -shared -nopw "
 
 ##USER root
 ##
