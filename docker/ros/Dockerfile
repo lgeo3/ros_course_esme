@@ -44,8 +44,15 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
   pip install supervisor-stdout && \
   apt-get -y clean
 
-#apt-get install gazebo7 ros-kinetic-gazebo-ros ros-kinetic-gazebo-ros-control ros-kinetic-gazebo-plugins ros-kinetic-gazebo-msgs ros-kinetic-turtlebot-gazebo 
-
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+ gazebo7 \
+ ros-kinetic-gazebo-ros \
+ ros-kinetic-gazebo-ros-control \
+ ros-kinetic-gazebo-plugins \
+ ros-kinetic-gazebo-msgs \
+ ros-kinetic-turtlebot-gazebo \
+ ros-kinetic-turtlebot-gazebo \
+ ros-kinetic-turtlebot-teleop
 
 
 RUN wget https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh

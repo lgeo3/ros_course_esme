@@ -46,3 +46,22 @@ You should get the following result:
 
 
 
+
+
+
+
+GAZEBO:
+
+Simulation turtlebot:
+
+todo utiliser le nom du package
+TURTLEBOT_GAZEBO_WORLD_FILE=/opt/ros/kinetic/share/turtlebot_gazebo/worlds/corridor.world roslaunch /opt/ros/kinetic/share/turtlebot_gazebo/launch/turtlebot_world.launch 
+
+gzclient
+
+rviz
+
+ajout dans rviz du pointcloud etc..
+
+
+installation package teleop : ros-kinetic-turtlebot-teleop
