@@ -5,6 +5,21 @@ LABEL com.nvidia.volumes.needed="nvidia_driver"
 ENV PATH /usr/local/nvidia/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
 
+RUN apt-get update && apt-get -y --no-install-recommends install \
+    ca-certificates \
+    curl
+
+RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
+RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture)" \
+    && curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture).asc" \
+    && gpg --verify /usr/local/bin/gosu.asc \
+    && rm /usr/local/bin/gosu.asc \
+    && chmod +x /usr/local/bin/gosu
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
 RUN apt-get update ; apt-get install -yq --no-install-recommends \ 
     wget \ 
     zsh \
@@ -56,17 +71,16 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
  ros-kinetic-turtlebot-gazebo \
  ros-kinetic-turtlebot-teleop
 
-
 RUN wget https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh
-RUN bash Anaconda2-4.2.0-Linux-x86_64.sh -f -b
-RUN ~/anaconda2/bin/pip install rospkg
-RUN ~/anaconda2/bin/pip install catkin_pkg
+RUN bash Anaconda2-4.2.0-Linux-x86_64.sh -f -b -p /opt/anaconda2
+RUN /opt/anaconda2/bin/pip install rospkg
+RUN /opt/anaconda2/bin/pip install catkin_pkg
 RUN bash -c "wget -O turbovnc.deb 'http://downloads.sourceforge.net/project/turbovnc/2.1/turbovnc_2.1_amd64.deb?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fturbovnc%2Ffiles%2F2.1%2F&ts=1484049712&use_mirror=netcologne'; dpkg -i turbovnc.deb"
 RUN bash -c "wget -O turbojpeg.deb 'http://downloads.sourceforge.net/project/libjpeg-turbo/1.5.1/libjpeg-turbo-official_1.5.1_amd64.deb?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Flibjpeg-turbo%2Ffiles%2F1.5.1%2F&ts=1484049518&use_mirror=netix'; dpkg -i turbojpeg.deb"
 RUN bash -c "mkdir ~/.vnc ; echo MYVNCPASSWORD | /opt/TurboVNC/bin/vncpasswd -f > ~/.vnc/passwd; chmod 700 ~/.vnc/passwd"
 
-COPY .zshrc /root/.zshrc
-CMD bash -c "~/anaconda2/bin/jupyter-notebook & roscore & xterm -e zsh"
+COPY .zshrc /etc/skel/.zshrc
+CMD bash -c "source /opt/ros/kinetic/setup.bash; /opt/anaconda2/bin/jupyter-notebook & roscore & xterm -e zsh"
 ENV DISPLAY :2
 
 #CMD bash -c "QT_X11_NO_MITSHM=1 xinit -- :0 -nolisten tcp vt$XDG_VTNR -noreset +extension GLX +extension RANDR +extension RENDER +extension XFIXES & x11vnc -display :0 -forever -shared -nopw "

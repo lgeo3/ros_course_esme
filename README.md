@@ -25,7 +25,9 @@ Hello from Docker!
 
 
     docker pull laurentgeorge3/ros-esme
-    docker run -it --name ros-esme --net host --privileged -v `pwd`/ros-esme-ws/data:/data --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" laurentgeorge3/ros-esme
+    xhost local:
+    cd ros_course_esme
+    docker run -it -e LOCAL_USER_ID=`id -u $USER` --name ros-esme --net host --privileged -v `pwd`/ros-esme-ws/data:/data --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" laurentgeorge3/ros-esme
 
 
 Note that if you ever exit the container, you can return to it using:
