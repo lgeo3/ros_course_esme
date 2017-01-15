@@ -49,8 +49,14 @@ You should get the following result:
 
 # ROS introduction using turtle-sim
 
+- [Exercice 1](./ros-esme-ws/data/controlling_a_turtle_ex1.ipynb)
+- [Exercice 2](./ros-esme-ws/data/controlling_a_turtle_ex2.ipynb)
+- [Exercice 3](./ros-esme-ws/data/controlling_a_turtle_ex3.ipynb)
+
 
 # Controlling a turtle-bot in gazebo simulation
+
+- [Exercice 4](./ros-esme-ws/data/controlling_a_turtle_ex4.ipynb)
 
 Start gazebo simulation with a turtlebot robot
 
