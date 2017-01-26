@@ -53,4 +53,4 @@ Start the docker container
 
     docker start -ai ros-esme
     
-Open the notebook for this assignement ([data/assignement_2.ipynb](./data/assignement_2.ipynb))
+Open the notebook for this assignement ([data/assignement_2.ipynb](./ros-esme-ws/data/nb_assignement_2.ipynb))
