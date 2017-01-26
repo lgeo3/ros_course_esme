@@ -46,3 +46,11 @@ If you have an nvidia graphic card use [nvidia-docker](https://github.com/NVIDIA
 
 Open the iPython notebook for this assignment ([data/1_notebook.ipynb](./tp_1.ipynb)), and follow the instructions to implement and run each indicated step. 
 
+
+# Assignment 2:
+
+Start the docker container
+
+    docker start -ai ros-esme
+    
+Open the notebook for this assignement ([data/assignement_2.ipynb](./data/assignement_2.ipynb))
