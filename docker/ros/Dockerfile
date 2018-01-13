@@ -5,52 +5,56 @@ LABEL com.nvidia.volumes.needed="nvidia_driver"
 ENV PATH /usr/local/nvidia/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
 
+# disable installation of manpages
+COPY etc/dpkg/dpkg.cfg.d/01_nodoc /etc/dpkg/dpkg.cfg.d/
+# disable keeping archive in /var/cache/apt/archives
+COPY etc/apt/apt.conf.d/02nocache /etc/apt/apt.conf.d/
+
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    binutils \
     ca-certificates \
     curl \
-    wget \ 
-    zsh \
-    vim \
-    ros-kinetic-rviz \
-    mesa-utils \
-    libsm6 \
-    xauth \
-    binutils \
-    xserver-xorg-input-void \
-    x11-xserver-utils \
-    openbox \
-    libgl1-mesa-dri \
-    binutils \
-    tint2 \ 
-    xinit \
-    xserver-xorg-video-dummy \ 
-    websockify \
-    x-window-system \
+    gazebo7 \
     git \
     libgl1-mesa-dri \
+    libsm6 \
     menu \
+    mesa-utils \
     net-tools \
-    openbox \
     python-pip \
-    sudo \
-    supervisor \
-    tint2 \
-    x11-xserver-utils \
-    x11vnc \
-    xinit \
-    xserver-xorg-video-dummy \
-    xserver-xorg-input-void \
-    websockify  \
-    gazebo7 \
+    ros-kinetic-gazebo-msgs \
+    ros-kinetic-gazebo-plugins \
     ros-kinetic-gazebo-ros \
     ros-kinetic-gazebo-ros-control \
-    ros-kinetic-gazebo-plugins \
-    ros-kinetic-gazebo-msgs \
-    ros-kinetic-turtlebot-gazebo \
+    ros-kinetic-rqt-graph \
+    ros-kinetic-rviz \
     ros-kinetic-turtlebot-gazebo \
     ros-kinetic-turtlebot-teleop \
     ros-kinetic-turtlesim \
-    ros-kinetic-rqt-graph
+    terminator \
+    vim \
+    wget \ 
+    x-window-system \
+    x11-xserver-utils \
+    xauth \
+    xinit \
+    zsh
+
+# removing manpages at the end to reducce size, we should definitely use dpkg filters
+
+
+# peut etre pas necessaire
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    openbox \
+    sudo \
+    supervisor \
+    tint2 \ 
+    websockify \
+    x11vnc \
+    xserver-xorg-input-void \
+    xserver-xorg-video-dummy 
+
+
 
 
 RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
@@ -61,7 +65,9 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
     && chmod +x /usr/local/bin/gosu
 
 
-RUN bash -c "wget https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh ; bash Anaconda2-4.2.0-Linux-x86_64.sh -f -b -p /opt/anaconda2; /opt/anaconda2/bin/pip install rospkg; /opt/anaconda2/bin/pip install catkin_pkg"
+# anaconda c'est peut etre un peu trop gros, une version plus light ou faire des pip install a la main
+# anaconda c'est 2Go a lui tout seul
+#RUN bash -c "wget https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh ; bash Anaconda2-4.2.0-Linux-x86_64.sh -f -b -p /opt/anaconda2; /opt/anaconda2/bin/pip install rospkg; /opt/anaconda2/bin/pip install catkin_pkg; rm /Anaconda2-4.2.0-Linux-x86_64.sh"
 
 #RUN bash -c "wget -O turbovnc.deb 'http://downloads.sourceforge.net/project/turbovnc/2.1/turbovnc_2.1_amd64.deb?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fturbovnc%2Ffiles%2F2.1%2F&ts=1484049712&use_mirror=netcologne'; dpkg -i turbovnc.deb"
 #RUN bash -c "wget -O turbojpeg.deb 'http://downloads.sourceforge.net/project/libjpeg-turbo/1.5.1/libjpeg-turbo-official_1.5.1_amd64.deb?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Flibjpeg-turbo%2Ffiles%2F1.5.1%2F&ts=1484049518&use_mirror=netix'; dpkg -i turbojpeg.deb ; mkdir ~/.vnc ; echo MYVNCPASSWORD | /opt/TurboVNC/bin/vncpasswd -f > ~/.vnc/passwd; chmod 700 ~/.vnc/passwd"
