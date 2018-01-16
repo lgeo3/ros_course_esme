@@ -1,58 +1,46 @@
 FROM ros:kinetic
-# apt-get install ros-desktop-full  pour avoir tout ça a tester ?
-ENV DEBIAN_FRONTEND noninteractive    # export DEBIAN_FRONTEND="noninteractive"
-LABEL com.nvidia.volumes.needed="nvidia_driver"
-ENV PATH /usr/local/nvidia/bin:${PATH}
-ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
 
 # disable installation of manpages
 COPY etc/dpkg/dpkg.cfg.d/01_nodoc /etc/dpkg/dpkg.cfg.d/
 # disable keeping archive in /var/cache/apt/archives
 COPY etc/apt/apt.conf.d/02nocache /etc/apt/apt.conf.d/
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     binutils \
     ca-certificates \
     curl \
     gazebo7 \
     git \
-    libgl1-mesa-dri \
-    libsm6 \
-    menu \
-    mesa-utils \
-    net-tools \
+#    libgl1-mesa-dri \
+#    libsm6 \
+#    menu \
+#    mesa-utils \
+#    net-tools \
     python-pip \
-    ros-kinetic-gazebo-msgs \
-    ros-kinetic-gazebo-plugins \
-    ros-kinetic-gazebo-ros \
-    ros-kinetic-gazebo-ros-control \
-    ros-kinetic-rqt-graph \
-    ros-kinetic-rviz \
-    ros-kinetic-turtlebot-gazebo \
-    ros-kinetic-turtlebot-teleop \
-    ros-kinetic-turtlesim \
+#    ros-kinetic-gazebo-msgs \
+#    ros-kinetic-gazebo-plugins \
+#    ros-kinetic-gazebo-ros \
+#    ros-kinetic-gazebo-ros-control \
+#    ros-kinetic-rqt-graph \
+#    ros-kinetic-rviz \
+#    ros-kinetic-turtlebot-gazebo \
+#    ros-kinetic-turtlebot-teleop \
+#    ros-kinetic-turtlesim \
     terminator \
     vim \
-    wget \ 
-    x-window-system \
-    x11-xserver-utils \
-    xauth \
-    xinit \
-    zsh
+    nano \
+    wget  
 
 # removing manpages at the end to reducce size, we should definitely use dpkg filters
 
 
 # peut etre pas necessaire
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    openbox \
+RUN apt-get install -y --no-install-recommends \
+#    openbox \
     sudo \
-    supervisor \
-    tint2 \ 
-    websockify \
-    x11vnc \
-    xserver-xorg-input-void \
-    xserver-xorg-video-dummy 
+    tmux 
+#    tint2 \ 
+#    websockify 
 
 
 
@@ -74,6 +62,8 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 
 COPY .zshrc /etc/skel/.zshrc
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+
+RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD bash -c "source /opt/ros/kinetic/setup.bash; /opt/anaconda2/bin/jupyter-notebook & roscore & xterm -e zsh"
