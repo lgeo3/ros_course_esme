@@ -11,36 +11,36 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     gazebo7 \
     git \
-#    libgl1-mesa-dri \
-#    libsm6 \
-#    menu \
-#    mesa-utils \
-#    net-tools \
+    #    libgl1-mesa-dri \
+    #    libsm6 \
+    #    menu \
+    mesa-utils \
+    #    net-tools \
     python-pip \
-#    ros-kinetic-gazebo-msgs \
-#    ros-kinetic-gazebo-plugins \
-#    ros-kinetic-gazebo-ros \
-#    ros-kinetic-gazebo-ros-control \
-#    ros-kinetic-rqt-graph \
-#    ros-kinetic-rviz \
-#    ros-kinetic-turtlebot-gazebo \
-#    ros-kinetic-turtlebot-teleop \
-#    ros-kinetic-turtlesim \
+    ros-kinetic-gazebo-msgs \
+    ros-kinetic-gazebo-plugins \
+    ros-kinetic-gazebo-ros \
+    ros-kinetic-gazebo-ros-control \
+    ros-kinetic-rqt-graph \
+    ros-kinetic-rviz \
+    ros-kinetic-turtlebot-gazebo \
+    ros-kinetic-turtlebot-teleop \
+    ros-kinetic-turtlesim \
     terminator \
     vim \
     nano \
-    wget  
+    wget
 
 # removing manpages at the end to reducce size, we should definitely use dpkg filters
 
 
 # peut etre pas necessaire
 RUN apt-get install -y --no-install-recommends \
-#    openbox \
+    #    openbox \
     sudo \
-    tmux 
-#    tint2 \ 
-#    websockify 
+    tmux
+#    tint2 \
+#    websockify
 
 
 
