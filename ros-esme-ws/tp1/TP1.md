@@ -34,17 +34,43 @@ roscore
 
 Now open a new terminal abouve ( `Ctrl` + `Shift` + `O` ) and split it in two ( `Ctrl` + `Shift` + `E` ). You can click or use the shortcuts to navigates between the terminals.
 
+In one terminal, list the current published topics using 
+```sh
+rostopic list
+```
+
+For more information about rostopic you can use
+```sh
+rostopic help
+```
+
 In one terminal, subscribe to the topic `/my_topic`, with the following command:
 ```sh
 rostopic echo /my_topic
 ```
 
-In the oher terminal, publish a message to this topic:
+In the oher terminal, use the following command to publish a message containing a Float32 value to this topic:
 ```sh
 rostopic pub /my_topic std_msgs/Float32 "data: 42.0"
 ```
 
 The message sent will be shown in the first terminal. Well done, you just publish your first message in ROS!
+
+List of ros message types could be found using the following command
+```sh
+rosmsg list
+```
+
+You can use the following command to get information about a message:
+```sh
+rosmsg info name_of_message_type
+```
+
+More difficult:
+- Use the correct command to display the information concerning the message type *std_msgs/String*
+- Publish a message each second on /my_second_topic with the type std_msgs/String and with your name as content
+- Listen to this topic
+
 
 #### Tips:
 - to kill a command you can use `Crtl` + `C`
@@ -60,6 +86,8 @@ The message sent will be shown in the first terminal. Well done, you just publis
 
 ## Part 2: let's code it in Python!
 #### Publisher node
+
+Create a file 
 This node called `talker` will publish a `std_msgs::Float32` message to the topic `/counter`.
 
 Complete the following code to publish every seconds the current counter, incremented by one at every loop cycle:
@@ -74,10 +102,10 @@ from std_msgs.msg import Float32
 
 def talker():
     # init the node: rospy.init_node(NODE_NAME)
-    rospy.init_node()
+    rospy.init_node(        )  # <--COMPLETE HERE 
 
     # init the publisher with the method signature: rospy.Publisher(TOPIC_NAME, MESSAGE_TYPE)
-    pub = rospy.Publisher()
+    pub = rospy.Publisher(        )  # <-- COMPLETE HERE
 
     # publisher rate: 1Hz
     rate = rospy.Rate(1)
@@ -102,8 +130,12 @@ Save the code into `talker.py` file, then execute the node with the command:
 python talker.py
 ```
 
+In an other terminal use rostopic echo to display the message that you are publishing. When you manage to see your message you can move to the next section.
+
+
 #### Subscriber node
 This node called `listener` will subscribe to the topic `/counter` and print the message to the output.
+For this you will define a subscriber that will call a function each time a new message is received (i.e using a callback).
 
 Complete the following code into `listener.py` file:
 
@@ -117,10 +149,10 @@ def callback(counter):
 
 def listener():
     # COMPLETE HERE
-    rospy.init_node()
+    rospy.init_node()  # <-- COMPLETE HERE, warning each node must have an unique name
 
     # init the subscriber with the method signature: rospy.Subsciber(TOPIC_NAME, MESSAGE_TYPE, CALLBACK_METHOD)
-    sub = rospy.Subscriber()
+    sub = rospy.Subscriber()  # <-- COMPLETE HERE
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
@@ -139,6 +171,7 @@ python listener.py
 
 
 ## Part 3: controlling a robot with the keyboard
+
 Writes a node to control the **TurtleSim** robot using the keyboard. You will use:
 - the TurtleSim viewer with the command: `rosrun turtlesim turtlesim_node`
 - find the topic to publish on, with: `rosnode info NODE_NAME`
