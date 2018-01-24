@@ -1,6 +1,6 @@
 # TP1: first steps ROS
 ## Introduction to the environment
-In the following you will practice the basics of ROS: subscribing and publishing to a **topic**, creates your first **node** and controlling a robot with the keyboard.
+In the following you will practice the basics of ROS: subscribing and publishing to a **topic**, create your first **node** and controlling a robot with the keyboard.
 
 All the ROS environment is already setup into a Docker container. To start it, enter the following command line:
 ```sh
@@ -32,9 +32,9 @@ The first thing you should run is the **roscore** when you ROS, with the command
 roscore
 ```
 
-Now open a new terminal abouve ( `Ctrl` + `Shift` + `O` ) and split it in two ( `Ctrl` + `Shift` + `E` ). You can click or use the shortcuts to navigates between the terminals.
+Now open a new terminal above ( `Ctrl` + `Shift` + `O` ) and split it in two ( `Ctrl` + `Shift` + `E` ). You can click or use the shortcuts to navigates between the terminals.
 
-In one terminal, list the current published topics using 
+In one terminal, list the current published topics using
 ```sh
 rostopic list
 ```
@@ -86,9 +86,9 @@ More difficult:
 
 ## Part 2: let's code it in Python!
 #### Publisher node
+Create a file `talker.py`.
 
-Create a file 
-This node called `talker` will publish a `std_msgs::Float32` message to the topic `/counter`.
+This node called `talker` will publish a `std_msgs/Float32` message to the topic `/counter`.
 
 Complete the following code to publish every seconds the current counter, incremented by one at every loop cycle:
 
@@ -102,9 +102,9 @@ from std_msgs.msg import Float32
 
 def talker():
     # init the node: rospy.init_node(NODE_NAME)
-    rospy.init_node(        )  # <--COMPLETE HERE 
+    rospy.init_node(        )  # <--COMPLETE HERE
 
-    # init the publisher with the method signature: rospy.Publisher(TOPIC_NAME, MESSAGE_TYPE)
+    # init the publisher with the method signature: rospy.Publisher(TOPIC_NAME, MESSAGE_TYPE, QUEUE_SIZE)
     pub = rospy.Publisher(        )  # <-- COMPLETE HERE
 
     # publisher rate: 1Hz
@@ -149,10 +149,10 @@ def callback(counter):
 
 def listener():
     # COMPLETE HERE
-    rospy.init_node()  # <-- COMPLETE HERE, warning each node must have an unique name
+    rospy.init_node(    )  # <-- COMPLETE HERE, warning each node must have an unique name
 
     # init the subscriber with the method signature: rospy.Subsciber(TOPIC_NAME, MESSAGE_TYPE, CALLBACK_METHOD)
-    sub = rospy.Subscriber()  # <-- COMPLETE HERE
+    sub = rospy.Subscriber(    )  # <-- COMPLETE HERE
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
@@ -171,7 +171,6 @@ python listener.py
 
 
 ## Part 3: controlling a robot with the keyboard
-
 Writes a node to control the **TurtleSim** robot using the keyboard. You will use:
 - the TurtleSim viewer with the command: `rosrun turtlesim turtlesim_node`
 - find the topic to publish on, with: `rosnode info NODE_NAME`
@@ -179,10 +178,10 @@ Writes a node to control the **TurtleSim** robot using the keyboard. You will us
 - find the message specifications, with: `rosmsg show MSG_NAME`
 
 #### Tips
-- code for `UP` is key 65
-- code for `DOWN` is key 66
-- code for `RIGHT` is key 67
-- code for `LEFT` is key 68
+- code for `↑` is key 65
+- code for `↓` is key 66
+- code for `→` is key 67
+- code for `←` is key 68
 - you can access to the key code with:
   ```python
   import sys
