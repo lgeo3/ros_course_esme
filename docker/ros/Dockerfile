@@ -65,9 +65,9 @@ COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD bash -c "source /opt/ros/kinetic/setup.bash; /opt/anaconda2/bin/jupyter-notebook & roscore & xterm -e zsh"
-ENV DISPLAY :2
+# ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+# CMD bash -c "source /opt/ros/kinetic/setup.bash; /opt/anaconda2/bin/jupyter-notebook & roscore & xterm -e zsh"
+# ENV DISPLAY :2
 
 #CMD bash -c "QT_X11_NO_MITSHM=1 xinit -- :0 -nolisten tcp vt$XDG_VTNR -noreset +extension GLX +extension RANDR +extension RENDER +extension XFIXES & x11vnc -display :0 -forever -shared -nopw "
 
