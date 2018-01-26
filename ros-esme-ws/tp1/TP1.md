@@ -11,9 +11,9 @@ To exit the container, use `Ctrl` + `D`, or the command line:
 exit
 ```
 
-ROS needs lots terminals to run the commands we need in this TP. So, we are encouraging you to use a terminal multiplexer, as *terminator* or *tmux*.
+ROS needs many terminals to run the commands we need in this TP. So, we encourage you to use a terminal multiplexer, as *terminator*.
 
-Run `terminator` command to open a new windows with **terminator**. Here some usefull shortcuts:
+Run `terminator` command to open a new window with **terminator**. Here some useful shortcuts:
 
 - Toggle fullscreen: `F11`
 - Split terminals horizontally: `Ctrl` + `Shift` + `O`
@@ -32,7 +32,7 @@ The first thing you should run is the **roscore** when you ROS, with the command
 roscore
 ```
 
-Now open a new terminal above ( `Ctrl` + `Shift` + `O` ) and split it in two ( `Ctrl` + `Shift` + `E` ). You can click or use the shortcuts to navigates between the terminals.
+Now open a new terminal above ( `Ctrl` + `Shift` + `O` ) and split it in two ( `Ctrl` + `Shift` + `E` ). You can click or use the shortcuts to navigate between the terminals.
 
 In one terminal, list the current published topics using
 ```sh
@@ -54,7 +54,7 @@ In the oher terminal, use the following command to publish a message containing 
 rostopic pub /my_topic std_msgs/Float32 "data: 42.0"
 ```
 
-The message sent will be shown in the first terminal. Well done, you just publish your first message in ROS!
+The message sent will be shown in the first terminal. Well done, you just published your first message in ROS!
 
 List of ros message types could be found using the following command
 ```sh
@@ -74,13 +74,13 @@ More difficult:
 
 #### Tips:
 - to kill a command you can use `Crtl` + `C`
-- try to change the value of the data send by the publisher to understand the mechanism
-- you can publish a value with a specific rate, with the option `-r`. For a message sent each second:
+- try to change the value of the data sent by the publisher to understand the mechanism
+- you can publish a value at a specific rate, with the option `-r`. For a message sent each second:
   ```sh
   rostopic pub -r 1.0 /my_topic std_msgs/Float32 "data: 42.0"
   ```
-- use `rostopic list` to list all topics avalaible
-- you can show the connexion between nodes using the command `rqt_graph`
+- use `rostopic list` to list all topics available
+- you can show the connection between nodes using the command `rqt_graph`
   ![rqt graph](static/pub_sub.png)
 
 
@@ -90,7 +90,7 @@ Create a file `talker.py`.
 
 This node called `talker` will publish a `std_msgs/Float32` message to the topic `/counter`.
 
-Complete the following code to publish every seconds the current counter, incremented by one at every loop cycle:
+Complete the following code to publish every second the current counter, incremented by one at every loop cycle:
 
 ```python
 #!/usr/bin/env python
@@ -171,7 +171,7 @@ python listener.py
 
 
 ## Part 3: controlling a robot with the keyboard
-Writes a node to control the **TurtleSim** robot using the keyboard. You will use:
+Write a node to control the **TurtleSim** robot using the keyboard. You will use:
 - the TurtleSim viewer with the command: `rosrun turtlesim turtlesim_node`
 - find the topic to publish on, with: `rosnode info NODE_NAME`
 - explore the message needed by the robot: `rostopic info TOPIC_NAME`
