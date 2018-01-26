@@ -22,6 +22,7 @@ Hello from Docker!
 
 ## Get the docker image
 sh install.sh
+
 sh run.sh
 
 
