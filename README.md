@@ -26,15 +26,18 @@ sh run.sh
 
 
 # Assignment 1:
-[ros-esme-ws/tp1/TP1.pdf](./tp_1.pdf)
+[tp1](ros-esme-ws/tp1/TP1.pdf)
 
 # Assignment 2:
-[ros-esme-ws/tp1/TP2.pdf](./tp_2.pdf)
+[tp2](ros-esme-ws/tp1/TP2.pdf)
 
 # Assignment 3:
-[ros-esme-ws/tp1/BE.pdf](./be.pdf)
+[tp3](ros-esme-ws/tp1/BE.pdf)
 
 
 # Ressources:
 
 - https://docs.google.com/presentation/d/1O8Q66wvtBAlon6o4e9EGP16J7mG8F53CRxSj4IiCnOI/edit?usp=sharing
+
+
+
