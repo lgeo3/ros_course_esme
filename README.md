@@ -3,7 +3,6 @@
 
     git clone https://github.com/laurent-george/ros_course_esme.git
 
-## Get the docker image
 
 ### Install Docker:
 
@@ -21,39 +20,20 @@ Hello from Docker!
 [...]
 ```
 
-### Running the course docker container
+## Get the docker image
 
-
-    docker pull laurentgeorge3/ros-esme
-    xhost local:
-    cd ros_course_esme
-    docker run -it -e LOCAL_USER_ID=`id -u $USER` --name ros-esme --net host --privileged -v `pwd`/ros-esme-ws/data:/data --env="DISPLAY" --env="QT_X11_NO_MITSHM=1" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" laurentgeorge3/ros-esme
-
-
-Note that if you ever exit the container, you can return to it using:
-
-    docker start -ai ros-esme
-
-If you have an nvidia graphic card use [nvidia-docker](https://github.com/NVIDIA/nvidia-docker): run nvidia-docker-plugin, then nvidia-docker run [...].
-   
-
-### Connect to the notebook application
-
-   Open the url [http://localhost:8888/](http://localhost:8888/) into your web browser to access the notebooks.
+sh run.sh
 
 
 # Assignment 1:
-
-Open the iPython notebook for this assignment ([data/1_notebook.ipynb](./tp_1.ipynb)), and follow the instructions to implement and run each indicated step. 
-
+[ros-esme-ws/tp1/TP1.pdf](./tp_1.pdf)
 
 # Assignment 2:
+[ros-esme-ws/tp1/TP2.pdf](./tp_2.pdf)
 
-Start the docker container
+# Assignment 3:
+[ros-esme-ws/tp1/BE.pdf](./be.pdf)
 
-    docker start -ai ros-esme
-    
-Open the notebook for this assignement ([data/assignement_2.ipynb](./ros-esme-ws/data/nb_assignement_2.ipynb))
 
 # Ressources:
 
