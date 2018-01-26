@@ -45,7 +45,7 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 COPY .zshrc /etc/skel/.zshrc
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN echo "source /opt/ros/kinetic/setup.bash" >> /root/.bashrc
+RUN echo "source /opt/ros/kinetic/setup.bash" >> /etc/skel/.bashrc
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD bash -c "source /opt/ros/kinetic/setup.bash; terminator"
