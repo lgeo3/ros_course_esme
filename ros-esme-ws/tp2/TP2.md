@@ -11,7 +11,7 @@ Run the roscore and turtlesim node (see TP1).
 
 ### Forward then turn
 
-In this exercice you will be ask to make the turtle do the following movements:
+In this exercice you have to make the turtle do the following movements:
 
    - go forward for 1 meter
    - turn to reach pi/2 heading
@@ -30,8 +30,8 @@ To reset the turtle position (if required) you can use the rosservice /reset:
  rosservice call /reset
 ```
 
- 1. Define a subscriber that will get the pose of the turtle and update a global variable with this
- 2. Publish message to control the turtle (you can use multiple while loop)
+ 1. Define a subscriber that will get the pose of the turtle and update the global variable
+ 2. Publish the correct cmd message to control the turtle (you can use multiple while loop)
 
 ```python
  import rospy
@@ -74,12 +74,15 @@ To reset the turtle position (if required) you can use the rosservice /reset:
 ```
 
 ## Go To (x,y)
-In this exercice you will be ask to make the turtle move to an oriented point.
+Now you have to move the turtle to a position (X, Y).
 
 ### Look then Move To
-The easiest mode to go to a position is first to look to the destination then to move to it in a straight line way.
+The easiest way to go to a position is to
+  - rotate the robot to look to the target point
+  - move to the point following a straight line
 
 #### Define a function that will turn the robot until a specific angle is reached
+You can use the following code:
 
 ```python
 def turn_to(robot_theta, target_theta, cmd_publisher):
@@ -101,14 +104,13 @@ def move_to(distance, cmd_publisher):
 ```
 
 #### Use the two functions
-Complete the following code to use the two previous functions
+Complete the following code to use the two previous functions.
 
 ```python
 import rospy
 from turtlesim.msg import Pose  # import the turtlesim Pose message type
 from geometry_msgs.msg import Twist   # import the Twist message type
 import math
-import tf
 
 turtle_pose = Pose()
 robot_current_orrientation = 0
