@@ -17,14 +17,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #    mesa-utils \
 #    net-tools \
     python-pip \
-#    ros-kinetic-gazebo-msgs \
-#    ros-kinetic-gazebo-plugins \
-#    ros-kinetic-gazebo-ros \
-#    ros-kinetic-gazebo-ros-control \
-#    ros-kinetic-rqt-graph \
-#    ros-kinetic-rviz \
-#    ros-kinetic-turtlebot-gazebo \
-#    ros-kinetic-turtlebot-teleop \
     terminator \
     vim \
     nano \
@@ -32,7 +24,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean
 
 RUN apt-get update && apt-get install -y zsh \
-        ros-kinetic-turtlesim
+        ros-kinetic-turtlesim \
+        ros-kinetic-gazebo-msgs \
+        ros-kinetic-gazebo-plugins \
+        ros-kinetic-gazebo-ros \
+        ros-kinetic-gazebo-ros-control \
+        ros-kinetic-rviz \
+        ros-kinetic-turtlebot-gazebo 
+#    ros-kinetic-turtlebot-teleop \
 
 RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
 RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture)" \
