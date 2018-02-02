@@ -30,7 +30,7 @@ sh run.sh
 [tp1](ros-esme-ws/tp1/TP1.pdf)
 
 # Assignment 2:
-[tp2](ros-esme-ws/tp2/TP2.pdf)
+[tp2](ros-esme-ws/tp2/tp2.pdf)
 
 # Assignment 3:
 [tp3](ros-esme-ws/tp1/BE.pdf)
