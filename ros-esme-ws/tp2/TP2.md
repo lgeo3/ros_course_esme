@@ -18,7 +18,6 @@ In this exercice you have to make the turtle do the following movements:
    - go forward for 2 meters
    - turn to reach pi heading
    - go forward for 2 meters
-   - turn to reach 3pi/4 heading
    - go forward for 2 meters
    - turn to reach 0 heading
    - go forward for 1 meter
