@@ -33,7 +33,7 @@ sh run.sh
 [tp2](ros-esme-ws/tp2/tp2.pdf)
 
 # Assignment 3:
-[tp3](ros-esme-ws/tp1/BE.pdf)
+[tp3](ros-esme-ws/be/be.pdf)
 
 
 # Ressources:
