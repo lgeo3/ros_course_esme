@@ -8,8 +8,8 @@ What is a ros subscriber ?
 List 3 ros message types ?
 
 ## Part 1: A simple publisher
-Write a simple ros publisher in python that publish on the topic /counter a number that is increment each second.
-You can use rospy.sleep(1) to sleep for one second.
+Write a simple ros publisher in python that publish on the topic /counter a number that is increment each 3 seconds.
+The message should be published each second.
 
 ## Part 2: Obstacle avoidance
 In this exercice you have to code a simple obstacle avoidance system for the turtlebot. Here is a video of the expected result: https://youtu.be/nsdixTXz4V0
