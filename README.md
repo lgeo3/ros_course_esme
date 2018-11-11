@@ -20,12 +20,6 @@ Hello from Docker!
 [...]
 ```
 
-## Get the docker image
-sh install.sh
-
-sh run.sh
-
-
 # Assignment 1:
 [tp1](ros-esme-ws/tp1/TP1.pdf)
 
@@ -38,7 +32,10 @@ sh run.sh
 
 # Ressources:
 
-- https://docs.google.com/presentation/d/1O8Q66wvtBAlon6o4e9EGP16J7mG8F53CRxSj4IiCnOI/edit?usp=sharing
+- course: https://docs.google.com/presentation/d/1O8Q66wvtBAlon6o4e9EGP16J7mG8F53CRxSj4IiCnOI/edit?usp=sharing
+- [python-cheatsheet](doc/python.pdf)
+- [ros-cheatsheet](doc/ros.pdf)
+
 
 
 
