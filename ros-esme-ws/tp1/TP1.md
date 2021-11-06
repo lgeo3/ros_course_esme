@@ -2,16 +2,16 @@
 ## Introduction to the environment
 In the following you will practice the basics of ROS: subscribing and publishing to a **topic**, create your first **node** and controlling a robot with the keyboard.
 
-All the ROS environment is already setup into a Docker container. To start it, enter the following command line:
+All the ROS environment is already setup into a Docker container. To start it, enter the following command:
 ```sh
 ./run.sh
 ```
-To exit the container, use `Ctrl` + `D`, or the command line:
+To exit the container, use `Ctrl` + `D`, or the command:
 ```sh
 exit
 ```
 
-ROS needs many terminals to run the commands we need in this TP. So, we encourage you to use a terminal multiplexer, as *terminator*.
+ROS needs many terminals, you can use a terminal multiplexer, as *terminator*.
 
 Run `terminator` command to open a new window with **terminator**. Here some useful shortcuts:
 
@@ -27,7 +27,7 @@ Run `terminator` command to open a new window with **terminator**. Here some use
 
 
 ## Part 1: publishing/subscribing to a topic
-The first thing you should run is the **roscore** when you ROS, with the command:
+The first thing you should run is the **roscore** using the command:
 ```sh
 roscore
 ```
@@ -56,7 +56,7 @@ rostopic pub /my_topic std_msgs/Float32 "data: 42.0"
 
 The message sent will be shown in the first terminal. Well done, you just published your first message in ROS!
 
-List of ros message types could be found using the following command
+List of message types could be found using the following command
 ```sh
 rosmsg list
 ```
@@ -67,12 +67,14 @@ rosmsg info name_of_message_type
 ```
 
 More difficult:
+
 - Use the correct command to display the information concerning the message type *std_msgs/String*
 - Publish a message each second on /my_second_topic with the type std_msgs/String and with your name as content
 - Listen to this topic
 
 
 #### Tips:
+
 - to kill a command you can use `Crtl` + `C`
 - try to change the value of the data sent by the publisher to understand the mechanism
 - you can publish a value at a specific rate, with the option `-r`. For a message sent each second:
@@ -80,17 +82,17 @@ More difficult:
   rostopic pub -r 1.0 /my_topic std_msgs/Float32 "data: 42.0"
   ```
 - use `rostopic list` to list all topics available
-- you can show the connection between nodes using the command `rqt_graph`
-  ![rqt graph](static/pub_sub.png)
 
 
 ## Part 2: let's code it in Python!
 #### Publisher node
-Create a file `talker.py`.
 
-This node called `talker` will publish a `std_msgs/Float32` message to the topic `/counter`.
+Create a node called `talker` that publish a `std_msgs/Float32` message to the topic `/counter`.
 
-Complete the following code to publish every second the current counter, incremented by one at every loop cycle:
+Tips:
+
+- Create a file `talker.py` in ros-esme-ws/tp1 directory  (you can use gedit to edit).
+- Complete the following code to publish every second the current counter, incremented by one at every loop cycle:
 
 ```python
 #!/usr/bin/env python
@@ -183,10 +185,11 @@ Write a node to control the **TurtleSim** robot using the keyboard. You will use
 - code for `→` is key 67
 - code for `←` is key 68
 - you can access to the key code with:
-  ```python
-  import sys
-  import tty
-  tty.setcbreak(sys.stdin)
-  while True:
-      key = ord(sys.stdin.read(1))
-  ```
+
+    ```python
+    import sys
+    import tty
+    tty.setcbreak(sys.stdin)
+    while True:
+    key = ord(sys.stdin.read(1))
+    ```

@@ -46,6 +46,8 @@ COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN echo "source /opt/ros/kinetic/setup.bash" >> /etc/skel/.bashrc
 
+RUN apt-get update && apt-get install -y ros-kinetic-rqt-graph
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD bash -c "source /opt/ros/kinetic/setup.bash; terminator"
 ENV DISPLAY :2
