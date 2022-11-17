@@ -19,19 +19,17 @@
 
    Launch the turtle bot in the Gazebo Simulator 
 
-
-* [ ] TODO: export corridor.world from kinetic and provide it to the students
-* [ ] TODO: fix the launch of the simulation (see my message on teams)
-
   @code sh
        export TURTLEBOT3_MODEL=burger
-  ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py 
+      ros2 launch turtlebot3_gazebo empty_world.launch.py 
   @end
 
+   Add some walls using 3d Cubes (don't forget to save your world).
 
 *** List the ros topics the robot is publishing on
 
     - The simulated robot is publishing messages on different ros topics. Your task is to list them and provide a short description of each messages.
+
 *** Visualize the published messages in rviz
 
     RVIZ allows to graphically visualize the different messages published, run RVIZ and set the current coordinate system to 
@@ -61,11 +59,10 @@
 
 **** Write and test the code to avoid obstacles
 
-     Please makes a video/recording of your robot evolving in the world.
+     You could use numpy function like: 
+        np.roll, np.array, min
 
-     - [ ] TODO: find the correct way to record gazebo video
 
-**** Bonus:
-     - run your program on the real turtlebot in the class room.
+     Please makes a video/recording of your robot evolving in the world (you can use the video recording button on the top right side of gazebo to record a .mp4 video, to copy file from the vm to your computer you can use ssh).
 
 
